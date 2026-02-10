@@ -234,6 +234,63 @@ footer{
   line-height: 1.5;
 }
 
+  /* --- Etiquetas sobre imágenes (sin cambiar HTML de estructura) --- */
+.gallery img[data-tag]{
+  position: relative;
+}
+
+.gallery img[data-tag]{
+  /* mantenemos tu estilo existente, solo aseguramos click */
+  cursor: zoom-in;
+}
+
+/* Creamos una “capa” con pseudo-elemento usando el alt/tag */
+.gallery .img-wrap{
+  position:relative;
+  border-radius:16px;
+  overflow:hidden;
+}
+
+.gallery .img-wrap img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  display:block;
+  border:none; /* el borde lo pone el wrapper */
+  border-radius:0;
+}
+
+.gallery .img-wrap{
+  border:1px solid rgba(201,163,91,.22);
+  background: rgba(0,0,0,.25);
+}
+
+.gallery .img-tag{
+  position:absolute;
+  top:10px; left:10px;
+  padding:7px 10px;
+  border-radius:999px;
+  font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.3px;
+  color: rgba(244,241,234,.94);
+  background: rgba(15,23,20,.72);
+  border: 1px solid rgba(201,163,91,.35);
+  backdrop-filter: blur(8px);
+  pointer-events:none;
+}
+
+.gallery .img-tag.green{
+  border-color: rgba(47,122,90,.55);
+  background: rgba(47,122,90,.28);
+}
+
+.gallery .img-tag.gold{
+  border-color: rgba(201,163,91,.55);
+  background: rgba(201,163,91,.18);
+}
+
   
 @media(max-width:980px){
   header{position:static}
@@ -368,11 +425,11 @@ footer{
    <div class="gallery-title">🏡 El espacio Kaizen</div>
 <p class="gallery-sub">Primero conocé el lugar. Click en cualquier foto para verla en grande.</p>
 <div class="gallery">
-  <img src="recepcion.jpeg" class="clickable-img" alt="Recepción Kaizen Spa">
-  <img src="box.jpeg" class="clickable-img" alt="Consultorio">
-  <img src="box-2.jpeg" class="clickable-img" alt="Consultorio">
-  <img src="box-3.jpeg" class="clickable-img" alt="Consultorio">
-  <img src="locacion.jpeg" class="clickable-img" alt="Dónde estamos">
+<img src="recepcion.jpeg" class="clickable-img" data-tag="LOCAL" data-tag-color="gold" alt="Recepción Kaizen Spa">
+<img src="box.jpeg" class="clickable-img" data-tag="CONSULTORIO" data-tag-color="gold" alt="Consultorio">
+<img src="box-2.jpeg" class="clickable-img" data-tag="CONSULTORIO" data-tag-color="gold" alt="Consultorio">
+<img src="box-3.jpeg" class="clickable-img" data-tag="CONSULTORIO" data-tag-color="gold" alt="Consultorio">
+<img src="locacion.jpeg" class="clickable-img" data-tag="UBICACIÓN" data-tag-color="gold" alt="Dónde estamos">
 </div>
 
 <div style="height:14px"></div>
@@ -380,19 +437,19 @@ footer{
 <div class="gallery-title">💆‍♀️ Tratamientos</div>
 <p class="gallery-sub">Fotos reales de sesiones y técnicas.</p>
 <div class="gallery">
-  <img src="corporal.jpeg" class="clickable-img" alt="Tratamientos corporales Kaizen Spa">
-  <img src="tratamiento-1.jpeg" class="clickable-img" alt="Tratamiento corporal Kaizen Spa">
-  <img src="tratamiento-2.jpeg" class="clickable-img" alt="Maderoterapia Kaizen Spa">
-  <img src="tratamiento-3.jpeg" class="clickable-img" alt="Tratamiento facial Kaizen Spa">
-  <img src="tratamiento-4.jpeg" class="clickable-img" alt="Drenaje y modelado corporal Kaizen Spa">
-  <img src="tratamiento-5.jpeg" class="clickable-img" alt="Drenaje y modelado corporal Kaizen Spa">
-  <img src="tratamiento-6.jpeg" class="clickable-img" alt="Drenaje y modelado corporal Kaizen Spa">
-  <img src="tratamiento-7.jpeg" class="clickable-img" alt="Drenaje y modelado corporal Kaizen Spa">
-  <img src="tratamiento-8.jpeg" class="clickable-img" alt="Drenaje y modelado corporal Kaizen Spa">
-  <img src="tratamiento-9.jpeg" class="clickable-img" alt="Drenaje y modelado corporal Kaizen Spa">
-  <img src="tratamiento-10.jpeg" class="clickable-img" alt="Drenaje y modelado corporal Kaizen Spa">
-  <img src="tratamiento-11.jpeg" class="clickable-img" alt="Drenaje y modelado corporal Kaizen Spa">
-  <img src="taping.jpeg" class="clickable-img" alt="Kinesiotape">
+<img src="corporal.jpeg" class="clickable-img" data-tag="KAIZENSTETIC" data-tag-color="green" alt="Tratamientos corporales Kaizen Spa">
+<img src="tratamiento-1.jpeg" class="clickable-img" data-tag="KAIZENSTETIC" data-tag-color="green" alt="Tratamiento corporal Kaizen Spa">
+<img src="tratamiento-2.jpeg" class="clickable-img" data-tag="KAIZENSTETIC" data-tag-color="green" alt="Maderoterapia Kaizen Spa">
+<img src="tratamiento-3.jpeg" class="clickable-img" data-tag="LIFTING FACIAL" data-tag-color="gold" alt="Tratamiento facial Kaizen Spa">
+<img src="tratamiento-4.jpeg" class="clickable-img" data-tag="PLAN DETOX" data-tag-color="green" alt="Drenaje y modelado corporal Kaizen Spa">
+<img src="tratamiento-5.jpeg" class="clickable-img" data-tag="PLAN DETOX" data-tag-color="green" alt="Drenaje y modelado corporal Kaizen Spa">
+<img src="tratamiento-6.jpeg" class="clickable-img" data-tag="PLAN DETOX" data-tag-color="green" alt="Drenaje y modelado corporal Kaizen Spa">
+<img src="taping.jpeg" class="clickable-img" data-tag="RECUPERACIÓN" data-tag-color="gold" alt="Kinesiotape">
+<img src="tratamiento-7.jpeg" class="clickable-img" alt="Drenaje y modelado corporal Kaizen Spa">
+<img src="tratamiento-8.jpeg" class="clickable-img" alt="Drenaje y modelado corporal Kaizen Spa">
+<img src="tratamiento-9.jpeg" class="clickable-img" alt="Drenaje y modelado corporal Kaizen Spa">
+<img src="tratamiento-10.jpeg" class="clickable-img" alt="Drenaje y modelado corporal Kaizen Spa">
+<img src="tratamiento-11.jpeg" class="clickable-img" alt="Drenaje y modelado corporal Kaizen Spa">
 </div>
 
 <div style="height:14px"></div>
@@ -400,11 +457,11 @@ footer{
 <div class="gallery-title">🌿 Experiencia & ambiente</div>
 <p class="gallery-sub">El clima del spa y la sensación Kaizen.</p>
 <div class="gallery">
-  <img src="spa-1.jpeg" class="clickable-img" alt="Kaizen Spa - ambiente 1">
-  <img src="spa-2.jpeg" class="clickable-img" alt="Kaizen Spa - ambiente 2">
-  <img src="spa-3.jpeg" class="clickable-img" alt="Kaizen Spa - ambiente 3">
-  <img src="facial.jpeg" class="clickable-img" alt="Kaizen Spa - ambiente 3">
-  <img src="pregunta.jpeg" class="clickable-img" alt="Kaizen Spa - imagen adicional">
+<img src="spa-1.jpeg" class="clickable-img" data-tag="EXPERIENCIA" alt="Kaizen Spa - ambiente 1">
+<img src="spa-2.jpeg" class="clickable-img" data-tag="EXPERIENCIA" alt="Kaizen Spa - ambiente 2">
+<img src="spa-3.jpeg" class="clickable-img" data-tag="EXPERIENCIA" alt="Kaizen Spa - ambiente 3">
+<img src="facial.jpeg" class="clickable-img" data-tag="LIFTING FACIAL" data-tag-color="gold" alt="Tratamiento facial Kaizen Spa">
+<img src="pregunta.jpeg" class="clickable-img" data-tag="INFO" alt="Kaizen Spa - imagen adicional">
 </div>
 
   </div>
@@ -571,6 +628,28 @@ footer{
     if (e.key === "ArrowRight") next();
     if (e.key === "ArrowLeft") prev();
   });
+    // ---------- Etiquetas en galería (auto) ----------
+  // Envuelve imágenes con data-tag dentro de .gallery para mostrar chips sin tocar estructura manualmente
+  document.querySelectorAll('.gallery img[data-tag]').forEach((img) => {
+    // Si ya fue envuelto, no repetir
+    if (img.parentElement && img.parentElement.classList.contains('img-wrap')) return;
+
+    const tag = img.getAttribute('data-tag') || '';
+    const tagColor = img.getAttribute('data-tag-color') || ''; // green | gold | ''
+
+    const wrap = document.createElement('div');
+    wrap.className = 'img-wrap';
+
+    const chip = document.createElement('span');
+    chip.className = 'img-tag' + (tagColor ? ' ' + tagColor : '');
+    chip.textContent = tag;
+
+    // Insertar wrapper donde estaba la imagen
+    img.parentNode.insertBefore(wrap, img);
+    wrap.appendChild(img);
+    wrap.appendChild(chip);
+  });
+
 </script>
 </body>
 </html>
