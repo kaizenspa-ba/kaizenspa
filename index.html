@@ -118,7 +118,13 @@ h3{margin:0 0 8px; font-size:18px}
   border-radius:16px;
   border:1px solid rgba(201,163,91,.22);
   background: rgba(0,0,0,.25);
+  transition: transform .18s ease, filter .18s ease;
 }
+.gallery img:hover{
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+}
+
 .kpi{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
   padding:14px;border-radius:18px;border:1px solid rgba(201,163,91,.22);
@@ -146,6 +152,73 @@ footer{
   font-size:13px;
 }
 
+/* ---------- Lightbox (abrir imágenes en grande) ---------- */
+.clickable-img{ cursor: zoom-in; }
+
+#lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.82);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  padding:18px;
+}
+#lightbox.open{display:flex;}
+#lightbox figure{
+  margin:0;
+  max-width:min(1100px,96vw);
+  max-height:92vh;
+}
+#lightbox img{
+  width:100%;
+  height:auto;
+  max-height:84vh;
+  border-radius:16px;
+  display:block;
+  box-shadow:0 18px 60px rgba(0,0,0,.55);
+}
+#lightbox .caption{
+  color:rgba(255,255,255,.85);
+  font-size:14px;
+  margin-top:10px;
+  text-align:center;
+  font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu;
+}
+#lightbox .closeBtn{
+  position:absolute;
+  top:14px;
+  right:14px;
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(15,23,20,.55);
+  color:#fff;
+  padding:10px 12px;
+  border-radius:12px;
+  font-weight:900;
+  cursor:pointer;
+}
+#lightbox .closeBtn:hover{ background:rgba(15,23,20,.75); }
+#lightbox .navBtn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  border:1px solid rgba(255,255,255,.20);
+  background:rgba(15,23,20,.45);
+  color:#fff;
+  width:44px;height:44px;
+  border-radius:14px;
+  font-size:22px;
+  font-weight:900;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+#lightbox .navBtn:hover{ background:rgba(15,23,20,.65); }
+#lightbox .prev{ left:14px; }
+#lightbox .next{ right:14px; }
+
 @media(max-width:980px){
   header{position:static}
   nav{display:none}
@@ -161,13 +234,15 @@ footer{
 
 <header>
   <div class="brand">
-    <!-- ✅ LOGO REAL -->
-    <img src="logo-kaizen.jpeg" alt="Kaizen Spa - Salud y Belleza" style="
-      width:56px;height:56px;border-radius:50%;
-      object-fit:cover;
-      border:1px solid rgba(201,163,91,.45);
-      background: rgba(0,0,0,.2);
-    ">
+    <!-- ✅ LOGO REAL (click para ver en grande) -->
+    <img src="logo-kaizen.jpeg" alt="Kaizen Spa - Salud y Belleza"
+      class="clickable-img"
+      style="
+        width:56px;height:56px;border-radius:50%;
+        object-fit:cover;
+        border:1px solid rgba(201,163,91,.45);
+        background: rgba(0,0,0,.2);
+      ">
     <div>
       <div class="brand-title">Kaizen Spa</div>
       <div class="small">Salud y Belleza · Boulogne</div>
@@ -271,17 +346,17 @@ footer{
   <div class="card">
     <h2>Galería</h2>
     <p class="lead" style="margin:0 0 14px">
-      Conocé el espacio y la experiencia Kaizen Spa.
+      Conocé el espacio y la experiencia Kaizen Spa. (Click para ver en grande)
     </p>
 
     <div class="gallery">
-      <img src="recepcion.jpeg" alt="Recepción Kaizen Spa">
-      <img src="cabina.jpeg" alt="Cabina Kaizen Spa">
-      <img src="corporal.jpeg" alt="Tratamientos corporales Kaizen Spa">
-      <img src="spa-1.jpeg" alt="Kaizen Spa - imagen 1">
-      <img src="spa-2.jpeg" alt="Kaizen Spa - imagen 2">
-      <img src="spa-3.jpeg" alt="Kaizen Spa - imagen 3">
-      <img src="pregunta.jpeg" alt="Kaizen Spa - imagen adicional">
+      <img src="recepcion.jpeg" class="clickable-img" alt="Recepción Kaizen Spa">
+      <img src="cabina.jpeg" class="clickable-img" alt="Cabina Kaizen Spa">
+      <img src="corporal.jpeg" class="clickable-img" alt="Tratamientos corporales Kaizen Spa">
+      <img src="spa-1.jpeg" class="clickable-img" alt="Kaizen Spa - imagen 1">
+      <img src="spa-2.jpeg" class="clickable-img" alt="Kaizen Spa - imagen 2">
+      <img src="spa-3.jpeg" class="clickable-img" alt="Kaizen Spa - imagen 3">
+      <img src="pregunta.jpeg" class="clickable-img" alt="Kaizen Spa - imagen adicional">
     </div>
   </div>
 </section>
@@ -317,7 +392,6 @@ footer{
       ⭐⭐⭐⭐⭐ <strong>Ver calificación y comentarios</strong>
     </div>
 
-    <!-- ✅ Reemplazá el link por el de Google Maps de Kaizen Spa -->
     <a class="btn" id="gmReviews" href="#" target="_blank" rel="noopener">🔗 Abrir reseñas en Google Maps</a>
   </div>
 </section>
@@ -330,18 +404,33 @@ footer{
 
 <a class="fixed-wa" id="waFixed" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
 
+<!-- Lightbox Modal -->
+<div id="lightbox" aria-hidden="true">
+  <button class="closeBtn" type="button" aria-label="Cerrar">✕</button>
+  <button class="navBtn prev" type="button" aria-label="Anterior">‹</button>
+
+  <figure>
+    <img id="lightboxImg" src="" alt="">
+    <figcaption class="caption" id="lightboxCap"></figcaption>
+  </figure>
+
+  <button class="navBtn next" type="button" aria-label="Siguiente">›</button>
+</div>
+
 <script>
   // ✅ CONFIG
   const WHATSAPP = "5491126356192";
 
-  // 🔁 PEGÁ ACÁ TU LINK REAL DE GOOGLE MAPS (el lugar Kaizen Spa)
+  // 🔁 Link de Google Maps (si ya tenés el link exacto del lugar, pegalo acá)
   const MAPS_URL = "https://maps.google.com/?q=Padre+Castiglia+971+Boulogne";
 
-  // 🔁 PEGÁ ACÁ TU LINK REAL A RESEÑAS EN GOOGLE MAPS
-  // Tip: buscá Kaizen Spa en Maps → clic en Reseñas → copiá la URL
+  // 🔁 Link directo a reseñas (ideal: el link del perfil de Kaizen Spa en Maps)
+  // Si no lo tenés aún, queda igual a MAPS_URL por defecto.
   const GOOGLE_REVIEWS_URL = MAPS_URL;
 
-  const msgTurno = encodeURIComponent("Hola Kaizen Spa 🌿 Vi la web y quiero info para mi primera visita. Me interesa: ____ (Kaizenstetic / Plan Detox / Lifting facial). ¿Tienen promo bienvenida?");
+  const msgTurno = encodeURIComponent(
+    "Hola Kaizen Spa 🌿 Vi la web y quiero info para mi primera visita. Me interesa: ____ (Kaizenstetic / Plan Detox / Lifting facial). ¿Tienen promo bienvenida?"
+  );
   const waLink = `https://wa.me/${WHATSAPP}?text=${msgTurno}`;
 
   document.getElementById("waTop").href = waLink;
@@ -350,10 +439,76 @@ footer{
   document.getElementById("waFixed").href = waLink;
 
   document.getElementById("mapsBtn").href = MAPS_URL;
-  document.getElementById("mapsBtn2").
+  document.getElementById("mapsBtn2").href = MAPS_URL;
 
+  document.getElementById("gmReviews").href = GOOGLE_REVIEWS_URL;
 
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  document.getElementById("y").textContent = new Date().getFullYear();
+
+  // ---------- Lightbox ----------
+  const lb = document.getElementById("lightbox");
+  const lbImg = document.getElementById("lightboxImg");
+  const lbCap = document.getElementById("lightboxCap");
+  const closeBtn = lb.querySelector(".closeBtn");
+  const prevBtn = lb.querySelector(".prev");
+  const nextBtn = lb.querySelector(".next");
+
+  // Incluye logo + galería (todo lo que tenga .clickable-img)
+  const imgs = Array.from(document.querySelectorAll("img.clickable-img"));
+  let currentIndex = 0;
+
+  function setImage(index){
+    currentIndex = index;
+    const img = imgs[currentIndex];
+    lbImg.src = img.getAttribute("src");
+    lbImg.alt = img.getAttribute("alt") || "Imagen Kaizen Spa";
+    lbCap.textContent = img.getAttribute("alt") || "";
+  }
+
+  function openLightbox(index){
+    setImage(index);
+    lb.classList.add("open");
+    lb.setAttribute("aria-hidden","false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox(){
+    lb.classList.remove("open");
+    lb.setAttribute("aria-hidden","true");
+    lbImg.src = "";
+    document.body.style.overflow = "";
+  }
+
+  function next(){
+    const i = (currentIndex + 1) % imgs.length;
+    setImage(i);
+  }
+
+  function prev(){
+    const i = (currentIndex - 1 + imgs.length) % imgs.length;
+    setImage(i);
+  }
+
+  imgs.forEach((img, i) => {
+    img.addEventListener("click", () => openLightbox(i));
+  });
+
+  // Cerrar al clickear el fondo
+  lb.addEventListener("click", (e) => {
+    if (e.target === lb) closeLightbox();
+  });
+
+  closeBtn.addEventListener("click", closeLightbox);
+  nextBtn.addEventListener("click", (e) => { e.stopPropagation(); next(); });
+  prevBtn.addEventListener("click", (e) => { e.stopPropagation(); prev(); });
+
+  // Teclado: ESC cierra, flechas navegan
+  document.addEventListener("keydown", (e) => {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowRight") next();
+    if (e.key === "ArrowLeft") prev();
+  });
+</script>
 </body>
 </html>
