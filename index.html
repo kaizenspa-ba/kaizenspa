@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kaizen Spa | Estética & Bienestar</title>
+<meta name="description" content="Kaizen Spa en Boulogne. Tratamientos estéticos, bienestar y packs promocionales. Turnos por WhatsApp.">
+
+<style>
+:root{
+ --bg:#0b0f14;--card:#111827;--text:#e5e7eb;--muted:#9ca3af;
+ --accent:#22c55e;--border:#1f2937;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;font-family:system-ui;
+ background:radial-gradient(1200px 600px at 20% 10%,#0f172a 0%,var(--bg) 60%);
+ color:var(--text)
+}
+.wrap{max-width:1100px;margin:auto;padding:20px}
+a{text-decoration:none;color:inherit}
+
+header{
+ position:sticky;top:10px;z-index:10;
+ display:flex;justify-content:space-between;align-items:center;
+ background:rgba(17,24,39,.8);backdrop-filter:blur(10px);
+ border:1px solid var(--border);border-radius:18px;padding:14px 18px
+}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{
+ width:46px;height:46px;border-radius:14px;
+ background:linear-gradient(135deg,#22c55e,#4ade80);
+ display:grid;place-items:center;font-weight:900;color:#052e16
+}
+nav{display:flex;gap:14px}
+nav a{font-weight:600;opacity:.85}
+nav a:hover{opacity:1}
+
+.btn{
+ background:linear-gradient(180deg,rgba(34,197,94,.3),rgba(34,197,94,.15));
+ border:1px solid rgba(34,197,94,.5);
+ padding:12px 16px;border-radius:14px;
+ font-weight:800;display:inline-flex;gap:8px;align-items:center
+}
+
+.hero{
+ display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin-top:25px
+}
+.card{
+ background:rgba(17,24,39,.75);
+ border:1px solid var(--border);
+ border-radius:20px;padding:22px
+}
+
+h1{font-size:42px;margin:0 0 10px;line-height:1.05}
+h2{margin:0 0 10px}
+.lead{color:var(--muted);line-height:1.6}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.item h3{margin:0 0 6px}
+
+.badge{
+ display:inline-block;
+ padding:8px 12px;
+ border-radius:999px;
+ background:rgba(34,197,94,.12);
+ border:1px solid rgba(34,197,94,.25);
+ font-size:13px
+}
+
+.fixed-wa{
+ position:fixed;bottom:18px;right:18px;
+ background:#22c55e;color:#052e16;
+ padding:14px 18px;border-radius:999px;
+ font-weight:900;box-shadow:0 10px 30px rgba(34,197,94,.45)
+}
+
+footer{text-align:center;color:var(--muted);margin:50px 0 30px;font-size:13px}
+
+@media(max-width:900px){
+ .hero{grid-template-columns:1fr}
+ .grid{grid-template-columns:1fr}
+ h1{font-size:34px}
+ nav{display:none}
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header>
+ <div class="brand">
+  <div class="logo">KZ</div>
+  <div>
+   <strong>Kaizen Spa</strong><br>
+   <small>Estética & Bienestar</small>
+  </div>
+ </div>
+ <nav>
+  <a href="#servicios">Servicios</a>
+  <a href="#promos">Promos</a>
+  <a href="#ubicacion">Ubicación</a>
+ </nav>
+ <a class="btn" href="https://wa.me/5491126356192?text=Hola%20Kaizen%20Spa%20quiero%20reservar%20un%20turno" target="_blank">
+  📲 Reservar
+ </a>
+</header>
+
+<section class="hero">
+ <div class="card">
+  <h1>Bienestar real.<br>Resultados visibles.</h1>
+  <p class="lead">
+   En <strong>Kaizen Spa</strong> trabajamos tu cuerpo y bienestar con tratamientos personalizados,
+   packs promocionales y atención profesional.
+  </p>
+
+  <a class="btn" href="https://wa.me/5491126356192?text=Hola%20Kaizen%20Spa%20quiero%20reservar%20un%20turno" target="_blank">
+   ✅ Pedir turno por WhatsApp
+  </a>
+
+  <div style="margin-top:14px">
+   <span class="badge">Atención personalizada</span>
+   <span class="badge">Turnos rápidos</span>
+   <span class="badge">Packs mensuales</span>
+  </div>
+ </div>
+
+ <div class="card">
+  <h3>📍 Dónde estamos</h3>
+  <p class="lead">
+   Padre Castiglia 971<br>
+   Boulogne – Provincia de Buenos Aires
+  </p>
+  <h3>📸 Instagram</h3>
+  <p class="lead">@kaizenspa.ba</p>
+ </div>
+</section>
+
+<section id="servicios" class="card" style="margin-top:20px">
+ <h2>Servicios</h2>
+ <div class="grid">
+  <div class="item"><h3>Tratamientos corporales</h3><p class="lead">Reducción, drenaje, modelado corporal.</p></div>
+  <div class="item"><h3>Tratamientos faciales</h3><p class="lead">Limpieza profunda, hidratación, antiage.</p></div>
+  <div class="item"><h3>Masajes & relax</h3><p class="lead">Bienestar físico y mental.</p></div>
+ </div>
+</section>
+
+<section id="promos" class="card" style="margin-top:20px">
+ <h2>Promos destacadas</h2>
+ <ul class="lead">
+  <li>Packs mensuales con descuento</li>
+  <li>Promos por pago en efectivo</li>
+  <li>Turnos combinados corporales + faciales</li>
+ </ul>
+</section>
+
+<section id="ubicacion" class="card" style="margin-top:20px">
+ <h2>Cómo llegar</h2>
+ <a class="btn" href="https://maps.google.com/?q=Padre+Castiglia+971+Boulogne" target="_blank">
+  📍 Ver en Google Maps
+ </a>
+</section>
+
+<footer>
+ © <span id="y"></span> Kaizen Spa · Boulogne
+</footer>
+
+</div>
+
+<a class="fixed-wa" href="https://wa.me/5491126356192?text=Hola%20Kaizen%20Spa%20quiero%20reservar%20un%20turno" target="_blank">
+ 💬 WhatsApp
+</a>
+
+<script>
+document.getElementById("y").textContent=new Date().getFullYear();
+</script>
+
+</body>
+</html>
