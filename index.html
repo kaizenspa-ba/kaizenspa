@@ -576,11 +576,7 @@ footer{
   // ✅ CONFIG
   const WHATSAPP = "5491126356192";
 
-  // 🔁 Link de Google Maps (si ya tenés el link exacto del lugar, pegalo acá)
   const MAPS_URL = "https://maps.app.goo.gl/1Vq8ebFYV69bF9KJ7";
-
-  // 🔁 Link directo a reseñas (ideal: el link del perfil de Kaizen Spa en Maps)
-  // Si no lo tenés aún, queda igual a MAPS_URL por defecto.
   const GOOGLE_REVIEWS_URL = "https://maps.app.goo.gl/1Vq8ebFYV69bF9KJ7";
 
   const msgTurno = encodeURIComponent(
@@ -595,10 +591,29 @@ footer{
 
   document.getElementById("mapsBtn").href = MAPS_URL;
   document.getElementById("mapsBtn2").href = MAPS_URL;
-
   document.getElementById("gmReviews").href = GOOGLE_REVIEWS_URL;
 
   document.getElementById("y").textContent = new Date().getFullYear();
+
+  // ---------- Etiquetas en galería (auto) ----------
+  // Envuelve imágenes con data-tag para mostrar chips
+  document.querySelectorAll(".gallery img[data-tag]").forEach((img) => {
+    if (img.parentElement && img.parentElement.classList.contains("img-wrap")) return;
+
+    const tag = img.getAttribute("data-tag") || "";
+    const tagColor = img.getAttribute("data-tag-color") || ""; // green | gold | ""
+
+    const wrap = document.createElement("div");
+    wrap.className = "img-wrap";
+
+    const chip = document.createElement("span");
+    chip.className = "img-tag" + (tagColor ? " " + tagColor : "");
+    chip.textContent = tag;
+
+    img.parentNode.insertBefore(wrap, img);
+    wrap.appendChild(img);
+    wrap.appendChild(chip);
+  });
 
   // ---------- Lightbox ----------
   const lb = document.getElementById("lightbox");
@@ -608,11 +623,13 @@ footer{
   const prevBtn = lb.querySelector(".prev");
   const nextBtn = lb.querySelector(".next");
 
-  // Incluye logo + galería (todo lo que tenga .clickable-img)
-    // CTA dentro del lightbox
+  // ✅ Volvemos a crear la lista DESPUÉS de envolver imágenes
+  const imgs = Array.from(document.querySelectorAll("img.clickable-img"));
+
+  // CTA dentro del lightbox
   const lbReserve = document.getElementById("lbReserve");
 
-  function waForTag(tag){
+  function waForTag(tag) {
     const base = "Hola Kaizen Spa 🌿 Vi la web y quiero info para mi primera visita.";
     let interest = "Me interesa: ";
 
@@ -625,14 +642,14 @@ footer{
     else interest += "un tratamiento (quiero recomendación).";
 
     const extra = " ¿Tienen promo bienvenida?";
-
     const msg = encodeURIComponent(`${base} ${interest}${extra}`);
+
     return `https://wa.me/${WHATSAPP}?text=${msg}`;
   }
 
   let currentIndex = 0;
 
-  function setImage(index){
+  function setImage(index) {
     currentIndex = index;
     const img = imgs[currentIndex];
 
@@ -640,38 +657,30 @@ footer{
     lbImg.alt = img.getAttribute("alt") || "Imagen Kaizen Spa";
     lbCap.textContent = img.getAttribute("alt") || "";
 
-    // Detecta etiqueta del tratamiento si existe
     const tag = img.getAttribute("data-tag") || "";
-
-    // Link dinámico a WhatsApp según la etiqueta
-    if (lbReserve){
-      lbReserve.href = waForTag(tag);
-    }
+    if (lbReserve) lbReserve.href = waForTag(tag);
   }
 
-
-  function openLightbox(index){
+  function openLightbox(index) {
     setImage(index);
     lb.classList.add("open");
-    lb.setAttribute("aria-hidden","false");
+    lb.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
   }
 
-  function closeLightbox(){
+  function closeLightbox() {
     lb.classList.remove("open");
-    lb.setAttribute("aria-hidden","true");
+    lb.setAttribute("aria-hidden", "true");
     lbImg.src = "";
     document.body.style.overflow = "";
   }
 
-  function next(){
-    const i = (currentIndex + 1) % imgs.length;
-    setImage(i);
+  function next() {
+    setImage((currentIndex + 1) % imgs.length);
   }
 
-  function prev(){
-    const i = (currentIndex - 1 + imgs.length) % imgs.length;
-    setImage(i);
+  function prev() {
+    setImage((currentIndex - 1 + imgs.length) % imgs.length);
   }
 
   imgs.forEach((img, i) => {
@@ -694,28 +703,6 @@ footer{
     if (e.key === "ArrowRight") next();
     if (e.key === "ArrowLeft") prev();
   });
-    // ---------- Etiquetas en galería (auto) ----------
-  // Envuelve imágenes con data-tag dentro de .gallery para mostrar chips sin tocar estructura manualmente
-  document.querySelectorAll('.gallery img[data-tag]').forEach((img) => {
-    // Si ya fue envuelto, no repetir
-    if (img.parentElement && img.parentElement.classList.contains('img-wrap')) return;
-
-    const tag = img.getAttribute('data-tag') || '';
-    const tagColor = img.getAttribute('data-tag-color') || ''; // green | gold | ''
-
-    const wrap = document.createElement('div');
-    wrap.className = 'img-wrap';
-
-    const chip = document.createElement('span');
-    chip.className = 'img-tag' + (tagColor ? ' ' + tagColor : '');
-    chip.textContent = tag;
-
-    // Insertar wrapper donde estaba la imagen
-    img.parentNode.insertBefore(wrap, img);
-    wrap.appendChild(img);
-    wrap.appendChild(chip);
-  });
-
 </script>
 </body>
 </html>
