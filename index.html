@@ -95,26 +95,30 @@ h1{
   line-height:1.06;
   letter-spacing:.3px;
 
-  /* Dorado intenso */
   background: linear-gradient(
-    180deg,
+    120deg,
     #fff3c4 0%,
-    #e6c87a 18%,
-    #c9a35b 45%,
-    #b8903e 65%,
-    #f5e3a1 100%
+    #e6c87a 20%,
+    #c9a35b 40%,
+    #b8903e 55%,
+    #f5e3a1 70%,
+    #c9a35b 85%,
+    #fff3c4 100%
   );
+
+  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 
-  /* Brillo elegante */
   text-shadow:
     0 1px 0 rgba(255,255,255,.25),
     0 6px 18px rgba(201,163,91,.35),
     0 18px 40px rgba(201,163,91,.25);
 
+  animation: goldShine 6s ease-in-out infinite;
 }
+
 h2{margin:0 0 10px; font-size:26px}
 h3{margin:0 0 8px; font-size:18px}
 .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
@@ -353,6 +357,18 @@ footer{
   border:1px solid rgba(47,122,90,.55);
   background: linear-gradient(180deg, rgba(47,122,90,.30), rgba(47,122,90,.14));
 }
+
+@keyframes goldShine{
+  0%{
+    background-position: 0% center;
+  }
+  50%{
+    background-position: 100% center;
+  }
+  100%{
+    background-position: 0% center;
+  }
+  
 @media(max-width:600px){
   h1{
     font-size:34px;
